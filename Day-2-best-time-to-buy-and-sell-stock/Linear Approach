@@ -1,0 +1,23 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length==0)
+        return 0; //return 0 if array size is 1
+        int leading=1; //pointer to the leading position
+        int trailing=0; //pointer to the trailing position
+        int maxProfit=0; //place to store maxprofit i.e. solution
+        for(int i=0;i<prices.length-1;i++)
+        {
+            if(prices[i]<prices[trailing] && i+1<prices.length)
+            {
+                trailing=i;  //update trailing position if we find a new minima
+                leading=i+1;  //update leading position if we find a new minima
+            }
+            if(prices[leading]-prices[trailing]>maxProfit)
+            {
+                maxProfit=prices[leading]-prices[trailing]; //update max profit 
+            }
+            leading++; //update leading position when an iteration is completed(here we can say leading is the index i)
+        }
+        return maxProfit;
+    }
+}
